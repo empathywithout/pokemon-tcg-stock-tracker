@@ -69,4 +69,23 @@
 
         const statusElement = document.querySelector(`#${productId} .status`);
         
-        if (text.includes('Add to Cart'))
+        if (text.includes('Add to Cart')) {
+            statusElement.textContent = 'In Stock';
+            statusElement.className = 'status in-stock';
+        } else {
+            statusElement.textContent = 'Out of Stock';
+            statusElement.className = 'status out-of-stock';
+        }
+    }
+
+    // Automatically check stock every 5 minutes (300000 milliseconds)
+    setInterval(() => {
+        checkStock('https://www.pokemoncenter.com/product/XXXX', 'product1');
+    }, 300000); // 300,000ms = 5 minutes
+
+    // Optional: Initial stock check when page loads
+    checkStock('https://www.pokemoncenter.com/product/XXXX', 'product1');
+</script>
+
+</body>
+</html>
