@@ -56,27 +56,17 @@
     <div class="product" id="product1">
         <h2>Pokemon Center ETB</h2>
         <p class="status">Checking...</p>
-        <button onclick="checkStock('https://www.pokemoncenter.com/product/XXXX', 'product1')">Check Stock</button>
+        <button onclick="checkStock('https://www.pokemoncenter.com/product/XXXX', 'product1')">Check Stock Now</button>
     </div>
     <!-- Add more products below as needed -->
 </div>
 
 <script>
+    // Function to check stock status automatically
     async function checkStock(url, productId) {
         const response = await fetch(url);
         const text = await response.text();
 
         const statusElement = document.querySelector(`#${productId} .status`);
         
-        if (text.includes('Add to Cart')) {
-            statusElement.textContent = 'In Stock';
-            statusElement.className = 'status in-stock';
-        } else {
-            statusElement.textContent = 'Out of Stock';
-            statusElement.className = 'status out-of-stock';
-        }
-    }
-</script>
-
-</body>
-</html>
+        if (text.includes('Add to Cart'))
