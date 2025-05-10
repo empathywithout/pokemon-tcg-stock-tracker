@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon TCG Stock Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .product {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            width: 200px;
+            text-align: center;
+        }
+        .in-stock {
+            color: green;
+        }
+        .out-of-stock {
+            color: red;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Pokemon TCG Stock Tracker</h1>
+
+<div class="container">
+    <!-- Example Product -->
+    <div class="product" id="product1">
+        <h2>Pokemon Center ETB</h2>
+        <p class="status">Checking...</p>
+        <button onclick="checkStock('https://www.pokemoncenter.com/product/XXXX', 'product1')">Check Stock</button>
+    </div>
+    <!-- Add more products below as needed -->
+</div>
+
+<script>
+    async function checkStock(url, productId) {
+        const response = await fetch(url);
+        const text = await response.text();
+
+        const statusElement = document.querySelector(`#${productId} .status`);
+        
+        if (text.includes('Add to Cart')) {
+            statusElement.textContent = 'In Stock';
+            statusElement.className = 'status in-stock';
+        } else {
+            statusElement.textContent = 'Out of Stock';
+            statusElement.className = 'status out-of-stock';
+        }
+    }
+</script>
+
+</body>
+</html>
